@@ -1,3 +1,6 @@
+#JSON data files
+utils/task_db.json
+
 # Logs
 logs
 *.log
