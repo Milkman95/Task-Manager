@@ -6,6 +6,9 @@ var startPage = "index.html";
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(express.static("./public"));
+const { viewTasks } = require('./utils/View_TaskUtil');
+app.get('/view-tasks', viewTasks);
+
 app.get('/', (req, res) => {
     res.sendFile(__dirname + "/public/" + startPage);
 })
