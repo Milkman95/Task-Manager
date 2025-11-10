@@ -10,6 +10,7 @@ function viewTasks() {
     for (var i = 0; i < response.length; i++) {
       html += '<tr>' +
         '<td>' + (i + 1) + '</td>' +
+        '<td>' + response[i].id + '</td>' +
         '<td>' + response[i].task_name + '</td>' +
         '<td>' + response[i].description + '</td>' +
         '<td>' + response[i].status + '</td>' +
