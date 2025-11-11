@@ -11,12 +11,22 @@
 <body onload="viewTasks()">
   <div class="container mt-5">
     <h2 class="text-center mb-4">Task List</h2>
+
+    <!-- Search bar + button -->
+    <div class="input-group mb-3">
+      <input type="text" id="searchInput" placeholder="Search by task name, description, or ID..." class="form-control">
+      <div class="input-group-append">
+        <button class="btn btn-primary" onclick="searchTasks()">Search</button>
+        <button class="btn btn-secondary" onclick="resetTasks()">Reset</button>
+      </div>
+    </div>
+
+    <!-- Error / message display -->
+    <div id="messageBox" class="alert alert-info d-none"></div>
+
+    <!-- Task Table -->
     <table class="table table-striped table-striped-custom">
       <thead>
-        <div class="container mt-3">
-  <input type="text" id="searchInput" placeholder="Search tasks..." class="form-control mb-3" onkeyup="filterTasks()">
-</div>
-
         <tr>
           <th>#</th>
           <th>ID</th>
