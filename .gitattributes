@@ -1,0 +1,57 @@
+# ==============================================
+# Git Attributes Configuration
+# Task Management Web Application
+# ==============================================
+
+# Auto detect text files and perform LF normalization
+# This ensures consistent line endings across all platforms
+* text=auto
+
+# ==============================================
+# Source Code Files - Force LF line endings
+# ==============================================
+
+# JavaScript files
+*.js text eol=lf
+*.json text eol=lf
+
+# HTML and CSS files
+*.html text eol=lf
+*.css text eol=lf
+
+# Markdown documentation
+*.md text eol=lf
+
+# Configuration files
+.gitattributes text eol=lf
+.gitignore text eol=lf
+
+# ==============================================
+# Binary Files - Never modify
+# ==============================================
+
+# Images
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.svg binary
+
+# Archives
+*.zip binary
+*.tar binary
+*.gz binary
+
+# ==============================================
+# Special Handling for Project Files
+# ==============================================
+
+# Database file - mark as generated (reduces PR noise)
+task_db.json linguist-generated=true
+
+# Package lock - use 'ours' merge strategy to avoid conflicts
+package-lock.json merge=ours
+
+# Template files - mark as vendored
+*.template.json linguist-vendored=true
