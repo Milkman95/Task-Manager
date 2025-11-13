@@ -1,4 +1,16 @@
 <!DOCTYPE html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DVOPS - Task Management Web App</title>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+    <script src="js/add-task.js"></script>
+    <link rel="stylesheet" href="css/styles.css">
 <html>
 
 <head>
@@ -81,6 +93,81 @@
     <h1>Task Manager</h1>
     <div id="task-list">
 
+<body>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <img src="images/logo.png" alt="Logo">
+        </div>
+        <div class="row justify-content-center mt-4">
+            <div class="col-md-10">
+                <h2>Task Management System</h2>
+            </div>
+            <div class="col-md-2">
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#taskModal">
+                    Add Task
+                </button>
+            </div>
+        </div>
+
+        <div class="row justify-content-center mt-4">
+            <div class="col-md-12">
+                <div id="taskList">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="taskModal" tabindex="-1" role="dialog" aria-labelledby="taskModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="taskModalLabel">Add New Task</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="task_name">Task Name * <small>(min 3 characters)</small></label>
+                            <input type="text" class="form-control" id="task_name" placeholder="Enter task name"
+                                required minlength="3">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="description">Description *
+                                <small>(<span id="charCount">0</span>/500 characters)</small>
+                            </label>
+                            <textarea class="form-control" id="description" rows="3"
+                                placeholder="Enter task description" required maxlength="500"
+                                oninput="updateCharCount()"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="status">Status *</label>
+                            <select class="form-control" id="status" required>
+                                <option value="">-- Select Status --</option>
+                                <option value="todo">To Do</option>
+                                <option value="in-progress">In Progress</option>
+                                <option value="completed">Completed</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="due_date">Due Date</label>
+                            <input type="date" class="form-control" id="due_date">
+                        </div>
+
+                        <small class="form-text text-muted">* Required fields</small>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" onclick="addTask()">Add Task</button>
+                </div>
+            </div>
+        </div>
     </div>
     <input type = "text" id = "task_id" placeholder = "Enter Task ID to Delete"><br><br>
 
