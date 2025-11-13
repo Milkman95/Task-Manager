@@ -1,5 +1,36 @@
 <!DOCTYPE html>
 <html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Test Edit Task</title>
+    <script src="js/edit-task.js"></script>
+</head>
+
+<body>
+
+    <h2>Test Edit Task</h2>
+
+    <form id="editTaskForm">
+        <label>ID:</label><br>
+        <input type="text" id="editId"><br><br>
+
+        <label>Task Name:</label><br>
+        <input type="text" id="editTaskName"><br><br>
+
+        <label>Description:</label><br>
+        <input type="text" id="editDescription"><br><br>
+
+        <label>Status:</label><br>
+        <input type="text" id="editStatus"><br><br>
+
+        <label>Due Date:</label><br>
+        <input type="date" id="editDueDate"><br><br>
+
+        <button type="button" id="updateButton" onclick="updateTask()">Update
+            Task</button>
+    </form>
+</body>
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">

@@ -9,6 +9,8 @@ app.use(express.static("./public"));
 const { viewTasks } = require('./utils/View_TaskUtil');
 app.get('/view-tasks', viewTasks);
 
+const { editTask } = require('./utils/EditTaskUtil');
+app.put('/edit-task/:id', editTask);
 const { deleteTask } = require('./utils/Delete_TaskUtil.js');
 app.delete('/delete-task/:id', deleteTask);
 
