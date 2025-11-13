@@ -9,6 +9,9 @@ app.use(express.static("./public"));
 const { viewTasks } = require('./utils/View_TaskUtil');
 app.get('/view-tasks', viewTasks);
 
+const { deleteTask } = require('./utils/Delete_TaskUtil.js');
+app.delete('/delete-task/:id', deleteTask);
+
 app.get('/', (req, res) => {
     res.sendFile(__dirname + "/public/" + startPage);
 })
