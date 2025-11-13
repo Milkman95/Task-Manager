@@ -6,6 +6,10 @@ var startPage = "index.html";
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(express.static("./public"));
+
+const { deleteTask } = require('./utils/Delete_TaskUtil.js');
+app.delete('/delete-task/:id', deleteTask);
+
 app.get('/', (req, res) => {
     res.sendFile(__dirname + "/public/" + startPage);
 })
