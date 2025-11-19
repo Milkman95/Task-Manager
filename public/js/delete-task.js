@@ -3,13 +3,21 @@ function deleteTask() {
     var id = document.getElementById("task_id").value.trim();
     var confirmationInput = document.getElementById("confirmation").value.trim();
 
-    if (confirmationInput.toLowerCase() !== "confirm") {
-        alert("Please type 'confirm' to delete the task.");
-        return; // Stop deletion if confirmation word is incorrect
+    // Check for empty input
+    if (confirmationInput === "") {
+        alert("Please type 'confirm' to proceed.");
+        return;
     }
 
+    // Check if input matches "confirm"
+    if (confirmationInput.toLowerCase() !== "confirm") {
+        alert("Please ensure 'confirm' is spelled correctly.");
+        return;
+    }
+
+    // Final confirmation popup
     if (!confirm("Are you sure you want to delete this task?")) {
-        return; // Exit function if user cancels
+        return;
     }
 
     var request = new XMLHttpRequest();
@@ -17,11 +25,11 @@ function deleteTask() {
     request.setRequestHeader("Content-Type", "application/json");
 
     request.onload = function () {
-        var response = JSON.parse(request.responseText); // Parse JSON response
+        var response = JSON.parse(request.responseText);
         if (request.status === 200) {
-            alert(response.message); // Show success message
+            alert(response.message);
         } else {
-            alert(response.message || "Unable to delete task."); // Show error
+            alert(response.message || "Unable to delete task.");
         }
     };
 
