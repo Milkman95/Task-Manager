@@ -13,7 +13,7 @@ function updateTask() {
     // Basic validation to ensure all fields are filled
     //First error handling to check if all fields are entered
     if (jsonData.task_name == "" || jsonData.description == "" || jsonData.status == "" ||
-        jsonData.due_date == "") {
+        document.getElementById("editDueDate").value == "") {
         alert('All fields are required!');
         return; // Stop execution if validation fails
     }
