@@ -5,16 +5,14 @@ const path = require('path');
 const TASKS_FILE = path.join('utils', 'task_db.json');
 const TEMPLATE_FILE = path.join('utils', 'task.template.json');
 
-// Valid status values
+//the only accepted status values
 const VALID_STATUSES = ['todo', 'in-progress', 'completed'];
 
 async function addTask(req, res) {
     try {
         const { task_name, description, status, due_date } = req.body;
 
-        // === VALIDATION SCENARIOS ===
-
-        // Error Scenario 1: Missing required fields
+        //missing fields
         if (!task_name || task_name.trim() === '') {
             return res.status(400).json({
                 message: 'Task name is required and cannot be empty'
@@ -33,28 +31,28 @@ async function addTask(req, res) {
             });
         }
 
-        // Error Scenario 2: Task name too short
+        //task name too short
         if (task_name.trim().length < 3) {
             return res.status(400).json({
                 message: 'Task name must be at least 3 characters long'
             });
         }
 
-        // Error Scenario 3: Invalid status value
+        //invalid status
         if (!VALID_STATUSES.includes(status.toLowerCase())) {
             return res.status(400).json({
                 message: `Invalid status. Allowed values are: ${VALID_STATUSES.join(', ')}`
             });
         }
 
-        // Error Scenario 4: Description too long
+        //description too long
         if (description.length > 500) {
             return res.status(400).json({
                 message: 'Description cannot exceed 500 characters'
             });
         }
 
-        // Error Scenario 5: Invalid due date (in the past)
+        //invalid due date
         if (due_date) {
             const selectedDate = new Date(due_date);
             const today = new Date();
@@ -66,7 +64,7 @@ async function addTask(req, res) {
                 });
             }
 
-            // Check if date is valid
+            //check if date is valid
             if (isNaN(selectedDate.getTime())) {
                 return res.status(400).json({
                     message: 'Invalid due date format'
@@ -74,14 +72,14 @@ async function addTask(req, res) {
             }
         }
 
-        // Read existing tasks
+        // read tasks
         let tasks = [];
         try {
             const data = await fs.readFile(TASKS_FILE, 'utf8');
             tasks = JSON.parse(data);
         } catch (err) {
             if (err.code === 'ENOENT') {
-                // If task_db.json doesn't exist, create it from the template
+                //if task dont exist create it from template
                 const templateData = await fs.readFile(TEMPLATE_FILE, 'utf8');
                 tasks = JSON.parse(templateData);
                 await fs.writeFile(TASKS_FILE, JSON.stringify(tasks, null, 2), 'utf8');
@@ -90,7 +88,7 @@ async function addTask(req, res) {
             }
         }
 
-        // Error Scenario 6: Duplicate task name check
+        //duplicate task name
         const duplicateTask = tasks.find(
             task => task.task_name.toLowerCase() === task_name.trim().toLowerCase()
         );
@@ -101,7 +99,7 @@ async function addTask(req, res) {
             });
         }
 
-        // Success Scenario: Create new task
+        //if success create new task
         const newTask = new Task(
             task_name.trim(),
             description.trim(),
@@ -109,7 +107,7 @@ async function addTask(req, res) {
             due_date
         );
 
-        // Add new task and save to file
+        //save to db
         tasks.push(newTask);
         await fs.writeFile(TASKS_FILE, JSON.stringify(tasks, null, 2), 'utf8');
 

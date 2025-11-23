@@ -6,7 +6,7 @@ function updateCharCount() {
 function addTask() {
     var response = "";
 
-    // Create an object to hold form data
+    // object for form data
     var jsonData = new Object();
     jsonData.task_name = document.getElementById("task_name").value;
     jsonData.description = document.getElementById("description").value;
@@ -45,36 +45,33 @@ function addTask() {
         }
     }
 
-    // Configure the request to POST data
     var request = new XMLHttpRequest();
     request.open("POST", "/add-task", true);
     request.setRequestHeader('Content-Type', 'application/json');
 
-    // Define what happens when the server respond
     request.onload = function () {
         console.log('Status:', request.status);
         console.log('Response:', request.responseText);
 
         try {
+            //success
             response = JSON.parse(request.responseText);
-
-            // Success case
             if (request.status === 201) {
                 alert('✓ Task created successfully: ' + jsonData.task_name);
 
-                // Clear form fields
+                // clear form 
                 document.getElementById("task_name").value = "";
                 document.getElementById("description").value = "";
                 document.getElementById("status").value = "";
                 document.getElementById("due_date").value = "";
                 document.getElementById("charCount").textContent = "0";
 
-                // Close modal
+                // close window
                 $('#taskModal').modal('hide');
 
                 console.log('New task:', response.task);
             }
-            // Error cases
+            // error
             else {
                 alert('Error: ' + response.message);
             }
@@ -85,7 +82,6 @@ function addTask() {
         }
     };
 
-    // Handle network errors
     request.onerror = function () {
         console.error('Request failed');
         alert('Network error - could not reach server');
